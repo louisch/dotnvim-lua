@@ -29,7 +29,7 @@ opt.hidden = true
 opt.lazyredraw = true
 opt.updatetime = 250
 
-opt.completeopt = 'menu,menuone,noselect'
+opt.completeopt = 'menu,menuone,preview'
 
 
 -----------------------------------------------------------
