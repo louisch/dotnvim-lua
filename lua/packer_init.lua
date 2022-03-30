@@ -76,7 +76,7 @@ return packer.startup(function(use)
   }
 
   -- Colorscheme
-  use "EdenEast/nightfox.nvim"
+  use "rmehri01/onenord.nvim"
 
   -- which-key
   use {
