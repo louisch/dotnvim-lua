@@ -2,7 +2,7 @@ local cmd = vim.cmd
 cmd [[packadd packer.nvim]]
 
 local packer = require('packer')
-return packer.startup(function()
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
   -- File explorer
