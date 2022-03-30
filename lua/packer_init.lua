@@ -52,10 +52,10 @@ return packer.startup(function(use)
   -- "gc" to comment visual regions/lines
   use {
     'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end
   }
+
+  -- Rust support
+  use 'simrat39/rust-tools.nvim'
 
   -- Statusline
   use {
@@ -63,9 +63,7 @@ return packer.startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' },
   }
 
-  use 'simrat39/rust-tools.nvim'
-
-  -- git labels
+  -- git
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
@@ -79,4 +77,9 @@ return packer.startup(function(use)
 
   -- Colorscheme
   use "EdenEast/nightfox.nvim"
+
+  -- which-key
+  use {
+    "folke/which-key.nvim",
+  }
 end)

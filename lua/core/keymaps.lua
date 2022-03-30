@@ -2,25 +2,26 @@
 -- Define keymaps of Neovim and installed plugins.
 -----------------------------------------------------------
 
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
 -- Change leader to space
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+local wk = require("which-key")
 
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
 
 -- Clear search highlighting
-map('', 'zz', ':nohl<CR>')
+wk.register({
+  zz = {
+    function()
+      vim.api.nvim_command("nohlsearch")
+    end,
+    "Clear search highlighting",
+  },
+})
 
 -- Abbreviation for vertical help
 vim.cmd('cnoreabbrev H vert h')
