@@ -26,8 +26,19 @@ return packer.startup(function(use)
 
   -- Completion
   use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-copilot'
+  --use 'hrsh7th/cmp-copilot'
   use 'hrsh7th/cmp-nvim-lsp'
+  use {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    config = function ()
+      vim.schedule(function() require("copilot") end)
+    end
+  }
+  use {
+      "zbirenbaum/copilot-cmp",
+      after = {"copilot.lua", "nvim-cmp"},
+  }
 
   -- Debugging
   use 'mfussenegger/nvim-dap'

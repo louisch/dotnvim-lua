@@ -21,12 +21,29 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    ['<Tab>'] = function(fallback)
+       if cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+       else
+          fallback()
+       end
+    end,
+    ['<S-Tab>'] = function(fallback)
+       if cmp.visible() then
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+       else
+          fallback()
+       end
+    end,
   },
   sources = {
-    { name = 'nvim_lsp' },
     { name = 'copilot' },
+    { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
+  },
+  experimental = {
+    ghost_text = true,
   },
 }
