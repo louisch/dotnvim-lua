@@ -19,7 +19,10 @@ return packer.startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- LSP
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    after = 'nvim-treesitter',
+  }
 
   -- Tag viewer
   use 'liuchengxu/vista.vim'

@@ -1,6 +1,6 @@
 -- Configure buffer-local keymaps for LSP actions
 local wk = require("which-key")
-local on_attach = function(client, buffer)
+local on_attach = function(_, buffer)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(buffer, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -36,9 +36,26 @@ local on_attach = function(client, buffer)
 end
 
 -- Integrate nvim-cmp
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
 
 -- Configure LSP servers
+--
+local lspconfig = require('lspconfig')
 
 local servers = {
   'cssls',
@@ -48,7 +65,6 @@ local servers = {
   'tsserver',
   'vuels',
 
-  'denols',
   'pyright',
   'rust_analyzer',
   'gopls',
@@ -58,7 +74,7 @@ local servers = {
   'yamlls',
 }
 for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
+  lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
     flags = {
@@ -68,13 +84,19 @@ for _, lsp in pairs(servers) do
   }
 end
 
+lspconfig.denols.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern("deno.json"),
+}
+
 -- Configure Lua LSP separately
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require('lspconfig').sumneko_lua.setup {
+lspconfig.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
