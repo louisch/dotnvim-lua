@@ -22,6 +22,9 @@ return packer.startup(function(use)
   use {
     'neovim/nvim-lspconfig',
     after = 'nvim-treesitter',
+    config = function()
+      require('nvim-lspconfig')
+    end
   }
 
   -- Tag viewer
