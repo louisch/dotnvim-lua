@@ -28,6 +28,18 @@ return packer.startup(function(use)
     end
   }
 
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
   -- Tag viewer
   use 'liuchengxu/vista.vim'
 
@@ -73,6 +85,14 @@ return packer.startup(function(use)
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
+  }
+  use {
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      local neogit = require('neogit')
+      neogit.setup {}
+    end,
   }
 
   -- Dashboard (start screen)
