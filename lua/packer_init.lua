@@ -19,11 +19,12 @@ return packer.startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- LSP
+  use 'williamboman/nvim-lsp-installer'
   use {
     'neovim/nvim-lspconfig',
-    after = 'nvim-treesitter',
+    after = {'nvim-treesitter', 'nvim-lsp-installer'},
     config = function()
-      require('nvim-lspconfig')
+      require('plugins/nvim-lspconfig')
     end
   }
 

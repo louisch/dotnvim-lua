@@ -122,3 +122,39 @@ lspconfig.sumneko_lua.setup {
     },
   },
 }
+
+
+-- LSP Installer
+require("nvim-lsp-installer").setup {
+  ensure_installed = {
+    "awk_ls",
+    "bashls",
+    "ccls",
+    "cssls",
+    "dockerls",
+    "eslint",
+    "gopls",
+    "hls",
+    "intelephense",
+    "marksman",
+    "pyright",
+    "rust_analyzer",
+    "sqlls",
+    "sumneko_lua",
+    "svelte",
+    "texlab",
+    "tflint",
+    "tsserver",
+    "volar",
+    "yamlls",
+  },
+  automatic_installation = true,
+  ui = {
+    icons = {
+      server_installed = "✓",
+      server_pending = "➜",
+      server_uninstalled = "✗"
+    }
+  },
+}
+
