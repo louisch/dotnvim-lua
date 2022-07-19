@@ -60,8 +60,9 @@ local lspconfig = require('lspconfig')
 local servers = {
   'cssls',
   'html',
+  'eslint',
   'svelte',
-  'tailwindcss',
+  'terraformls',
   'tsserver',
   'vuels',
 
@@ -69,7 +70,6 @@ local servers = {
   'rust_analyzer',
   'gopls',
 
-  'remark_ls',
   'jsonls',
   'yamlls',
 }
@@ -83,12 +83,6 @@ for _, lsp in pairs(servers) do
     }
   }
 end
-
-lspconfig.denols.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern("deno.json"),
-}
 
 -- Configure Lua LSP separately
 
