@@ -21,7 +21,16 @@ wk.register({
     end,
     "Clear search highlighting",
   },
-})
+}, { mode = "n" })
+
+wk.register({
+  t = {
+    function()
+      vim.api.nvim_command("NvimTreeToggle")
+    end,
+    "Toggle NvimTree"
+  }
+}, { prefix = "<leader>" })
 
 -- Abbreviation for vertical help
 vim.cmd('cnoreabbrev H vert h')
