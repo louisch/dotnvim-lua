@@ -23,13 +23,13 @@ opt.tabstop = 2
 opt.smartindent = true
 
 -----------------------------------------------------------
--- Memory, CPU
+-- Behavior
 -----------------------------------------------------------
 opt.hidden = true
 opt.lazyredraw = true
 opt.updatetime = 250
-
 opt.completeopt = 'menu,menuone,preview'
+opt.undofile = true
 
 
 -----------------------------------------------------------
