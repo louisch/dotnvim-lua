@@ -24,11 +24,23 @@ wk.register({
 }, { mode = "n" })
 
 wk.register({
-  t = {
+  tt = {
     function()
       vim.api.nvim_command("NvimTreeToggle")
     end,
     "Toggle NvimTree"
+  },
+  tn = {
+    function()
+      vim.api.nvim_command("tabnext")
+    end,
+    "Go to next tab"
+  },
+  tp = {
+    function()
+      vim.api.nvim_command("tabprev")
+    end,
+    "Go to previous tab"
   }
 }, { prefix = "<leader>" })
 
