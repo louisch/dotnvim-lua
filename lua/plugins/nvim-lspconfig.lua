@@ -59,8 +59,8 @@ local lspconfig = require('lspconfig')
 
 local servers = {
   'cssls',
-  'html',
   'eslint',
+  'html',
   'svelte',
   'terraformls',
   'tsserver',
