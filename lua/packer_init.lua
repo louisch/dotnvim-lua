@@ -108,4 +108,8 @@ return packer.startup(function(use)
   use {
     "folke/which-key.nvim",
   }
+
+  use {
+    'f-person/git-blame.nvim'
+  }
 end)
