@@ -19,14 +19,17 @@ return packer.startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- LSP
-  use 'williamboman/nvim-lsp-installer'
   use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     'neovim/nvim-lspconfig',
-    after = {'nvim-treesitter', 'nvim-lsp-installer'},
-    config = function()
-      require('plugins/nvim-lspconfig')
-    end
   }
+
+  -- DAP
+  use 'mfussenegger/nvim-dap'
+
+  -- Linter/Formatter
+  use 'jose-elias-alvarez/null-ls.nvim'
 
   use {
     "folke/trouble.nvim",
@@ -46,9 +49,6 @@ return packer.startup(function(use)
   -- Completion
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
-
-  -- Debugging
-  use 'mfussenegger/nvim-dap'
 
   -- Autopairs
   use {
