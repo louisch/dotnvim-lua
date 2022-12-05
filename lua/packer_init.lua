@@ -109,6 +109,11 @@ return packer.startup(function(use)
     "folke/which-key.nvim",
   }
 
+  -- undotree
+  use {
+    "mbbill/undotree"
+  }
+
   use {
     'f-person/git-blame.nvim'
   }
