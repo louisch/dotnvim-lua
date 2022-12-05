@@ -25,9 +25,12 @@ return packer.startup(function(use)
   -- LSP
   use {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    'neovim/nvim-lspconfig',
-    config = require("plugins/mason").config,
+    {
+      "williamboman/mason-lspconfig.nvim",
+      config = require("plugins/mason").config,
+      require = {"williamboman/mason.nvim"}
+    },
+    "neovim/nvim-lspconfig",
   }
 
   -- DAP
