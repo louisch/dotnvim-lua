@@ -13,6 +13,16 @@ local wk = require("which-key")
 -- Neovim shortcuts
 -----------------------------------------------------------
 
+-- config
+wk.register({
+  sl = {
+    function ()
+      vim.api.nvim_command("luafile %")
+    end,
+    "Source luafile"
+  },
+}, { prefix = "<leader>" })
+
 -- Clear search highlighting
 wk.register({
   zz = {

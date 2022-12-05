@@ -6,7 +6,10 @@ return packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
   -- File explorer
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config = require('nvim-tree').config,
+  }
 
   -- Icons
   use 'kyazdani42/nvim-web-devicons'
@@ -14,41 +17,49 @@ return packer.startup(function(use)
   -- Treesitter interface
   use {
     'nvim-treesitter/nvim-treesitter',
+    use 'nvim-treesitter/nvim-treesitter-textobjects',
     run = ':TSUpdate',
+    config = require("plugins/nvim-treesitter").config,
   }
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- LSP
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     'neovim/nvim-lspconfig',
+    config = require("plugins/mason").config,
   }
 
   -- DAP
   use 'mfussenegger/nvim-dap'
 
   -- Linter/Formatter
-  use 'jose-elias-alvarez/null-ls.nvim'
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = require("plugins/null-ls").config,
+    requires = { "nvim-lua/plenary.nvim" },
+  }
 
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
+    config = require("plugins/trouble").config,
   }
 
   -- Tag viewer
   use 'liuchengxu/vista.vim'
 
   -- Completion
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
+  use {
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+    config = require("plugins/nvim-cmp").config,
+  }
 
   -- Autopairs
   use {
     'windwp/nvim-autopairs',
-    config = function()
-      require('nvim-autopairs').setup()
-    end
+    config = require("plugins/nvim-autopairs").config,
   }
 
   -- Snippets
@@ -72,19 +83,20 @@ return packer.startup(function(use)
   use {
     'famiu/feline.nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
+    config = require("plugins/feline").config,
   }
 
   -- git
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
+    config = require("plugins/gitsigns").config,
   }
   use {
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
     config = function()
-      local neogit = require('neogit')
-      neogit.setup {}
+      require('neogit').setup {}
     end,
   }
 
@@ -100,6 +112,7 @@ return packer.startup(function(use)
   -- which-key
   use {
     "folke/which-key.nvim",
+    config = require("plugins/which-key").config,
   }
 
   -- undotree
