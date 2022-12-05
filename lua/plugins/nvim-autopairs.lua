@@ -8,6 +8,7 @@ npairs.setup({
         lua = {'string'},-- it will not add a pair on that treesitter node
         javascript = {'template_string'},
         java = false,-- don't check treesitter on java
+        typescript = {'template_string'},
     },
 })
 
@@ -21,4 +22,7 @@ npairs.add_rules({
 
 local cmp = require('cmp')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done({  map_char = { tex = '' } })
+)
