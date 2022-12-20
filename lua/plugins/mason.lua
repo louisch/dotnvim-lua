@@ -1,13 +1,22 @@
+local function lsp_attach(client, bufnr)
+  local buf_command = vim.api.nvim_buf_create_user_command
+  buf_command(bufnr, 'LspFormat', function()
+    vim.lsp.buf.format()
+  end, {desc = 'Format buffer with language server'})
+end
+
 local config = function ()
   require("mason").setup()
   require("mason-lspconfig").setup()
-
   require("mason-lspconfig").setup_handlers {
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function (server_name) -- default handler (optional)
-      require("lspconfig")[server_name].setup {}
+      require("lspconfig")[server_name].setup {
+        on_attach = lsp_attach,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      }
     end,
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:

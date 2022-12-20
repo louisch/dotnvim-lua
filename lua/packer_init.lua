@@ -37,7 +37,9 @@ return packer.startup(function(use)
       require = {"williamboman/mason.nvim"}
     },
     "neovim/nvim-lspconfig",
+    requires = "simrat39/rust-tools.nvim",
   }
+  use "simrat39/rust-tools.nvim"
 
   -- DAP
   use 'mfussenegger/nvim-dap'
@@ -63,6 +65,7 @@ return packer.startup(function(use)
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/nvim-cmp',
     config = require("plugins/nvim-cmp").config,
+    requires = "L3MON4D3/LuaSnip",
   }
 
   -- Autopairs
@@ -76,17 +79,15 @@ return packer.startup(function(use)
     'L3MON4D3/LuaSnip',
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-    end
+    end,
+    rocks = { 'jsregexp' },
+    requires = "rafamadriz/friendly-snippets",
   }
-  use 'saadparwaiz1/cmp_luasnip'
 
   -- "gc" to comment visual regions/lines
   use {
     'numToStr/Comment.nvim',
   }
-
-  -- Rust support
-  use 'simrat39/rust-tools.nvim'
 
   -- Statusline
   use {
@@ -111,6 +112,9 @@ return packer.startup(function(use)
       require('neogit').setup {}
     end,
   }
+  use {
+    'f-person/git-blame.nvim'
+  }
 
   -- Dashboard (start screen)
   use {
@@ -130,9 +134,5 @@ return packer.startup(function(use)
   -- undotree
   use {
     "mbbill/undotree"
-  }
-
-  use {
-    'f-person/git-blame.nvim'
   }
 end)
