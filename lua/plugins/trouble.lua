@@ -1,8 +1,6 @@
-local M = {}
-
-M.config = function ()
+local config = function ()
   require("trouble").setup {}
-  
+
   vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
     {silent = true, noremap = true}
   )
@@ -23,4 +21,6 @@ M.config = function ()
   )
 end
 
-return M
+return {
+  config = config,
+}

@@ -1,18 +1,16 @@
-local M = M or {}
-
-M.config = function ()
+local config = function ()
   local npairs = require("nvim-autopairs")
   local Rule = require('nvim-autopairs.rule')
   local ts_conds = require('nvim-autopairs.ts-conds')
 
   npairs.setup({
-      check_ts = true,
-      ts_config = {
-          lua = {'string'},-- it will not add a pair on that treesitter node
-          javascript = {'template_string'},
-          java = false,-- don't check treesitter on java
-          typescript = {'template_string'},
-      },
+    check_ts = true,
+    ts_config = {
+      lua = {'string'},-- it will not add a pair on that treesitter node
+      javascript = {'template_string'},
+      java = false,-- don't check treesitter on java
+      typescript = {'template_string'},
+    },
   })
 
   -- press % => %% only while inside a comment or string
@@ -31,4 +29,6 @@ M.config = function ()
   )
 end
 
-return M
+return {
+  config = config,
+}

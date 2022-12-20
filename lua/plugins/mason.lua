@@ -1,6 +1,4 @@
-local M = M or {}
-
-M.config = function ()
+local config = function ()
   require("mason").setup()
   require("mason-lspconfig").setup()
 
@@ -44,4 +42,6 @@ M.config = function ()
   }
 end
 
-return M
+return {
+  config = config
+}

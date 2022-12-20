@@ -1,6 +1,4 @@
-local M = M or {}
-
-M.config = function ()
+local config = function ()
   require('gitsigns').setup {
     signs = {
       add = { text = '▊' },
@@ -12,4 +10,6 @@ M.config = function ()
   }
 end
 
-return M
+return {
+  config = config,
+}

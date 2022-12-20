@@ -1,6 +1,4 @@
-local M = M or {}
-
-M.config = function ()
+local config = function ()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
 
@@ -41,14 +39,13 @@ M.config = function ()
     },
     sources = {
       { name = 'nvim_lsp' },
-      { name = 'luasnip' },
-      { name = 'path' },
-      { name = 'buffer' },
-    },
-    experimental = {
-      ghost_text = true,
+      --{ name = 'luasnip' },
+      --{ name = 'path' },
+      --{ name = 'buffer' },
     },
   }
 end
 
-return M
+return {
+  config = config,
+}

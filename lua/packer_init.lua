@@ -3,12 +3,18 @@ cmd [[packadd packer.nvim]]
 
 local packer = require('packer')
 return packer.startup(function(use)
-  use 'wbthomason/packer.nvim' -- packer can manage itself
+  use {
+    'wbthomason/packer.nvim', -- packer can manage itself
+  }
 
   -- File explorer
   use {
     'kyazdani42/nvim-tree.lua',
+    require = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
     config = require('nvim-tree').config,
+    tag = 'nightly',
   }
 
   -- Icons
@@ -54,8 +60,8 @@ return packer.startup(function(use)
 
   -- Completion
   use {
-    'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/nvim-cmp',
     config = require("plugins/nvim-cmp").config,
   }
 
@@ -85,7 +91,10 @@ return packer.startup(function(use)
   -- Statusline
   use {
     'famiu/feline.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      'lewis6991/gitsigns.nvim',
+    },
     config = require("plugins/feline").config,
   }
 

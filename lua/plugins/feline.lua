@@ -1,7 +1,7 @@
-local M = M or {}
-
-M.config = function ()
+local config = function ()
   require('feline').setup()
 end
 
-return M
+return {
+  config = config,
+}

@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function ()
+local config = function ()
   require("which-key").setup {
     plugins = {
       presets = {
@@ -11,4 +9,6 @@ M.config = function ()
   }
 end
 
-return M
+return {
+  config = config,
+}
