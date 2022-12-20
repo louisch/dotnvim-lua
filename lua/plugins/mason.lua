@@ -15,6 +15,14 @@ local config = function ()
       require("rust-tools").setup {}
     end,
 
+    ["grammarly"] = function ()
+      require'lspconfig'.grammarly.setup {
+        init_options = {
+          clientId = require("secrets").GrammarlyClientId
+        }
+      }
+    end,
+
     ["sumneko_lua"] = function ()
       require'lspconfig'.sumneko_lua.setup {
         settings = {
