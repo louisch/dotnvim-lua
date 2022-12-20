@@ -1,3 +1,7 @@
-local cmd = vim.cmd
+local config = function ()
+  vim.cmd("colorscheme onenord")
+end
 
-cmd("colorscheme onenord")
+return {
+  config = config,
+}

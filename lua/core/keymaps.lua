@@ -2,57 +2,63 @@
 -- Define keymaps of Neovim and installed plugins.
 -----------------------------------------------------------
 
--- Change leader to space
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 local wk = require("which-key")
 
------------------------------------------------------------
--- Neovim shortcuts
------------------------------------------------------------
+local config = function ()
+  -- Change leader to space
+  vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+  vim.g.mapleader = ' '
+  vim.g.maplocalleader = ' '
 
--- config
-wk.register({
-  sl = {
-    function ()
-      vim.api.nvim_command("luafile %")
-    end,
-    "Source luafile"
-  },
-}, { prefix = "<leader>" })
+  -----------------------------------------------------------
+  -- Neovim shortcuts
+  -----------------------------------------------------------
 
--- Clear search highlighting
-wk.register({
-  zz = {
-    function()
-      vim.api.nvim_command("nohlsearch")
-    end,
-    "Clear search highlighting",
-  },
-}, { mode = "n" })
+  -- config
+  wk.register({
+    sl = {
+      function ()
+        vim.api.nvim_command("luafile %")
+      end,
+      "Source luafile"
+    },
+  }, { prefix = "<leader>" })
 
-wk.register({
-  tt = {
-    function()
-      vim.api.nvim_command("NvimTreeToggle")
-    end,
-    "Toggle NvimTree"
-  },
-  tn = {
-    function()
-      vim.api.nvim_command("tabnext")
-    end,
-    "Go to next tab"
-  },
-  tp = {
-    function()
-      vim.api.nvim_command("tabprev")
-    end,
-    "Go to previous tab"
-  }
-}, { prefix = "<leader>" })
+  -- Clear search highlighting
+  wk.register({
+    zz = {
+      function()
+        vim.api.nvim_command("nohlsearch")
+      end,
+      "Clear search highlighting",
+    },
+  }, { mode = "n" })
 
--- Abbreviation for vertical help
-vim.cmd('cnoreabbrev H vert h')
+  wk.register({
+    tt = {
+      function()
+        vim.api.nvim_command("NvimTreeToggle")
+      end,
+      "Toggle NvimTree"
+    },
+    tn = {
+      function()
+        vim.api.nvim_command("tabnext")
+      end,
+      "Go to next tab"
+    },
+    tp = {
+      function()
+        vim.api.nvim_command("tabprev")
+      end,
+      "Go to previous tab"
+    }
+  }, { prefix = "<leader>" })
+
+  -- Abbreviation for vertical help
+  vim.cmd('cnoreabbrev H vert h')
+end
+
+return {
+  config = config,
+}

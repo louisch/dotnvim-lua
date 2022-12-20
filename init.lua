@@ -1,5 +1,5 @@
-require("packer_init")
+require("packer_init").config()
 
-require("core/settings")
-require("core/keymaps")
-require("core/colors")
+require("core/settings").config()
+require("core/keymaps").config()
+require("core/colors").config()
