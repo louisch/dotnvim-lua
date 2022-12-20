@@ -1,4 +1,4 @@
-local function lsp_attach(client, bufnr)
+local function lsp_attach(_, bufnr)
   local buf_command = vim.api.nvim_buf_create_user_command
   buf_command(bufnr, 'LspFormat', function()
     vim.lsp.buf.format()
@@ -18,17 +18,15 @@ local config = function ()
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
     end,
-    -- Next, you can provide a dedicated handler for specific servers.
-    -- For example, a handler override for the `rust_analyzer`:
-    ["rust_analyzer"] = function ()
-      require("rust-tools").setup {}
-    end,
 
+    -- Next, you can provide a dedicated handler for specific servers.
     ["grammarly"] = function ()
       require'lspconfig'.grammarly.setup {
         init_options = {
           clientId = require("secrets").GrammarlyClientId
-        }
+        },
+        on_attach = lsp_attach,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
     end,
 
@@ -54,6 +52,8 @@ local config = function ()
             },
           },
         },
+        on_attach = lsp_attach,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
     end,
   }

@@ -1,14 +1,18 @@
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 local config = function ()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
 
   vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-  local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
-
   cmp.setup {
     completion = {
-      completeopt = 'menu,menuone,noinsert'
+      autocomplete = true,
+      completeopt = 'menu,menuone,noinsert',
     },
     snippet = {
       expand = function(args)
@@ -21,30 +25,27 @@ local config = function ()
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      -- when menu is visible, navigate to next item
-      -- when line is empty, insert a tab character
-      -- else, activate completion
-      ['<Tab>'] = cmp.mapping(function(fallback)
-        local col = vim.fn.col('.') - 1
-
+      ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_next_item(cmp_select_opts)
-        elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-          fallback()
-        else
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        elseif has_words_before() then
           cmp.complete()
-        end
-      end, {'i', 's'}),
-
-      -- when menu is visible, navigate to previous item on list
-      -- else, revert to default behavior
-      ['<S-Tab>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item(cmp_select_opts)
         else
           fallback()
         end
-      end, {'i', 's'}),
+      end, { "i", "s" }),
+
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
     },
     sources = {
       { name = 'nvim_lsp', keyword_length = 3 },
@@ -52,16 +53,10 @@ local config = function ()
       { name = 'path' },
       { name = 'buffer', keyword_length = 3 },
     },
+    experimental = {
+      ghost_text = true,
+    },
   }
-
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = 'buffer' },
-    })
-  })
 
   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline({ '/', '?' }, {

@@ -4,38 +4,43 @@
 local cmd = vim.cmd
 local opt = vim.opt
 
-local config = function ()
-  -----------------------------------------------------------
-  -- Neovim UI
-  -----------------------------------------------------------
+-----------------------------------------------------------
+-- UI
+-----------------------------------------------------------
+local function ui()
   opt.ignorecase = true
   opt.smartcase = true
   opt.termguicolors = true
   opt.relativenumber = true
   opt.number = true
   opt.splitright = true
+end
 
-  -----------------------------------------------------------
-  -- Tabs, indent
-  -----------------------------------------------------------
+-----------------------------------------------------------
+-- Indentation
+-----------------------------------------------------------
+local function indentation()
   opt.expandtab = true
   opt.shiftwidth = 2
   opt.tabstop = 2
   opt.smartindent = true
+end
 
-  -----------------------------------------------------------
-  -- Behavior
-  -----------------------------------------------------------
+-----------------------------------------------------------
+-- Behavior
+-----------------------------------------------------------
+local function behavior()
   opt.hidden = true
   opt.lazyredraw = true
   opt.updatetime = 250
   opt.completeopt = 'menu,menuone,preview'
   opt.undofile = true
+end
 
-
-  -----------------------------------------------------------
-  -- Autocommands
-  -----------------------------------------------------------
+-----------------------------------------------------------
+-- Autocommands
+-----------------------------------------------------------
+local function autocmd()
   -- Remove trailing whitespace on save
   cmd [[autocmd BufWritePre * :%s/\s\+$//e]]
 
@@ -51,6 +56,17 @@ local config = function ()
       autocmd TextYankPost * silent! lua vim.highlight.on_yank()
     augroup end
   ]]
+
+  cmd [[
+    autocmd BufWritePost ~/.config/nvim/*.lua :lua require("init").reinit()
+  ]]
+end
+
+local function config()
+  ui()
+  indentation()
+  behavior()
+  autocmd()
 end
 
 return {
