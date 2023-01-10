@@ -9,7 +9,7 @@ local function packer_config(use)
     require = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
-    config = require('nvim-tree').config,
+    config = require('plugins/nvim-tree').config,
     tag = 'nightly',
   }
 
@@ -106,7 +106,7 @@ local function packer_config(use)
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
     config = function()
-      require('neogit').setup {}
+      require('plugins/neogit').setup {}
     end,
   }
   use {
