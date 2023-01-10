@@ -5,7 +5,7 @@ local function packer_config(use)
 
   -- File explorer
   use {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     require = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
@@ -14,7 +14,7 @@ local function packer_config(use)
   }
 
   -- Icons
-  use 'kyazdani42/nvim-web-devicons'
+  use 'nvim-tree/nvim-web-devicons'
 
   -- Treesitter interface
   use {
