@@ -106,7 +106,7 @@ local function packer_config(use)
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
     config = function()
-      require('plugins/neogit').setup {}
+      require('neogit').setup {}
     end,
   }
   use {
