@@ -15,7 +15,7 @@ local config = function ()
     function (server_name) -- default handler (optional)
       require("lspconfig")[server_name].setup {
         on_attach = lsp_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        --capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
     end,
 
@@ -26,7 +26,7 @@ local config = function ()
           clientId = require("secrets").GrammarlyClientId
         },
         on_attach = lsp_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        --capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
     end,
 
@@ -45,6 +45,7 @@ local config = function ()
             workspace = {
               -- Make the server aware of Neovim runtime files
               library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
@@ -53,7 +54,7 @@ local config = function ()
           },
         },
         on_attach = lsp_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        --capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
     end,
   }

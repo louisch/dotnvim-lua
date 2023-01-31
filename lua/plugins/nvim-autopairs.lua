@@ -21,12 +21,12 @@ local config = function ()
       :with_pair(ts_conds.is_not_ts_node({'function'}))
   })
 
-  local cmp = require('cmp')
-  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-  cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done({  map_char = { tex = '' } })
-  )
+  --local cmp = require('cmp')
+  --local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  --cmp.event:on(
+  --  'confirm_done',
+  --  cmp_autopairs.on_confirm_done({  map_char = { tex = '' } })
+  --)
 end
 
 return {
