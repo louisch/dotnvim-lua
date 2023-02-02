@@ -11,6 +11,7 @@ local config = function ()
       java = false,-- don't check treesitter on java
       typescript = {'template_string'},
     },
+    disable_in_macro = true,
   })
 
   -- press % => %% only while inside a comment or string
